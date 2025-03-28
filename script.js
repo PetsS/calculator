@@ -1,6 +1,7 @@
-let numA = 0;
-let numB = 0;
+let operandA = 0;
+let operandB = 0;
 let operator = "";
+let displayValue = 0;
 
 function operate(numA, numB, operator) {
   numA = parseFloat(numA);
@@ -29,7 +30,18 @@ function operate(numA, numB, operator) {
 }
 
 // DOM
+const container = document.querySelector("#container");
+const display = document.querySelector("#display");
+const buttons = container.querySelectorAll("button");
 
+buttons.forEach(button => {
+  if (button.className === "operand") {
+    button.addEventListener("click", () => {
+      displayValue += button.value;
+      display.textContent = displayValue;
+    });
+  };
+});
 
 
 
