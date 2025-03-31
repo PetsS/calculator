@@ -1,3 +1,5 @@
+
+// function for operations
 function operate(numA, numB, operator) {
   numA = parseFloat(numA);
   numB = parseFloat(numB);
@@ -35,6 +37,7 @@ let operandA = 0;
 let operandB = 0;
 let operator = "";
 
+// Calculate logic for all buttons
 buttons.forEach((button) => {
   if (button.className === "operand") {
     button.addEventListener("click", () => {
@@ -90,6 +93,15 @@ buttons.forEach((button) => {
       display.textContent = displayValue;
       console.log("opA: " + operandA);
       console.log("opB: " + operandB);
+    });
+  } else if (button.className === "clear") {
+    button.addEventListener("click", () => {
+      displayValue = "";
+      temporaryNumber = 0;
+      operandA = 0;
+      operandB = 0;
+      operator = "";
+      display.textContent = 0;
     });
   }
 });
