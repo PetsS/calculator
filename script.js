@@ -23,7 +23,12 @@ function operate(numA, numB, operator) {
       result = "Error: Invalid operator";
   }
 
-  return result.toFixed(5); // rounds up the result to N decimals
+  // Only format numbers, not error messages
+  if (typeof result === "number") {
+    result = parseFloat(result.toFixed(5)); // Remove unnecessary trailing zeros, but also displays upt to a N nuber of decimals rounded up
+  }
+
+  return result;
 }
 
 // DOM
