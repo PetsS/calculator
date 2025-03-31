@@ -1,4 +1,3 @@
-
 // function for operations
 function operate(numA, numB, operator) {
   numA = parseFloat(numA);
@@ -37,7 +36,7 @@ const display = document.querySelector("#display");
 const buttons = container.querySelectorAll("button");
 
 let displayValue = "";
-let temporaryNumber = 0;
+let temporaryNumber = "";
 let operandA = 0;
 let operandB = 0;
 let operator = "";
@@ -46,18 +45,14 @@ let operator = "";
 buttons.forEach((button) => {
   if (button.className === "operand") {
     button.addEventListener("click", () => {
-      if (temporaryNumber == 0) {
-        displayValue = 0;
-      }
-
       temporaryNumber += button.value;
 
       if (operandA != 0) {
         operandB = parseFloat(temporaryNumber);
       }
 
-      displayValue += button.value;
-      display.textContent = parseFloat(displayValue);
+      displayValue = temporaryNumber;
+      display.textContent = displayValue;
 
       console.log("tempNum: " + temporaryNumber);
     });
@@ -66,18 +61,18 @@ buttons.forEach((button) => {
       if (operandA === 0) {
         operandA = parseFloat(temporaryNumber);
         console.log("opA: " + operandA);
-        temporaryNumber = 0;
+        temporaryNumber = "";
         console.log("tempNum: " + temporaryNumber);
       } else if (operandB === 0) {
         operandB = parseFloat(temporaryNumber);
         console.log("opB: " + operandB);
-        temporaryNumber = 0;
+        temporaryNumber = "";
         console.log("tempNum: " + temporaryNumber);
       } else {
         operandA = operate(operandA, operandB, operator);
         operandB = 0;
         console.log("opA: " + operandA);
-        temporaryNumber = 0;
+        temporaryNumber = "";
         console.log("tempNum: " + temporaryNumber);
       }
       operator = button.value;
@@ -90,7 +85,7 @@ buttons.forEach((button) => {
     button.addEventListener("click", () => {
       if (operandA !== 0 || operandB !== 0) {
         displayValue = operate(operandA, operandB, operator);
-        temporaryNumber = 0;
+        temporaryNumber = "";
       } else {
         displayValue = parseFloat(temporaryNumber);
       }
@@ -98,15 +93,29 @@ buttons.forEach((button) => {
       display.textContent = displayValue;
       console.log("opA: " + operandA);
       console.log("opB: " + operandB);
+      console.log("tempNum: " + temporaryNumber);
+      
     });
   } else if (button.className === "clear") {
     button.addEventListener("click", () => {
       displayValue = "";
-      temporaryNumber = 0;
+      temporaryNumber = "";
       operandA = 0;
       operandB = 0;
       operator = "";
       display.textContent = 0;
+    });
+  } else if (button.className === "decimal") {
+    button.addEventListener("click", () => {
+      if (!temporaryNumber.includes(".")) {
+        if (temporaryNumber.length == 0) {
+          temporaryNumber += "0.";
+        } else {
+          temporaryNumber += ".";
+        }
+        displayValue = temporaryNumber;
+        display.textContent = displayValue;
+      }
     });
   }
 });
