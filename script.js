@@ -23,7 +23,7 @@ function operate(numA, numB, operator) {
       result = "Error: Invalid operator";
   }
 
-  return result;
+  return result.toFixed(5); // rounds up the result to N decimals
 }
 
 // DOM
