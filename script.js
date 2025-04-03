@@ -45,6 +45,10 @@ let operator = "";
 buttons.forEach((button) => {
   if (button.className === "operand") {
     button.addEventListener("click", () => {
+      if (temporaryNumber === "0") {
+        temporaryNumber = "";
+      }
+
       temporaryNumber += button.value;
 
       if (operandA != 0) {
@@ -94,7 +98,6 @@ buttons.forEach((button) => {
       console.log("opA: " + operandA);
       console.log("opB: " + operandB);
       console.log("tempNum: " + temporaryNumber);
-      
     });
   } else if (button.className === "clear") {
     button.addEventListener("click", () => {
@@ -116,6 +119,19 @@ buttons.forEach((button) => {
         displayValue = temporaryNumber;
         display.textContent = displayValue;
       }
+    });
+  } else if (button.className === "backspace") {
+    button.addEventListener("click", () => {
+      if (operandA === 0 || operandB === 0) {
+        let actualDisplay = display.textContent;
+        displayValue = actualDisplay.slice(0, -1);
+      }
+      if (displayValue === "") {
+        displayValue = "0";
+      }
+      temporaryNumber = displayValue;
+      display.textContent = displayValue;
+      console.log("tempNum: " + temporaryNumber);
     });
   }
 });
